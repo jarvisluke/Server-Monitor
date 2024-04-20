@@ -9,12 +9,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/server_list"
-        android:name="com.zybooks.serverm.ItemListFragment"
+        android:name="com.mad.servermonitor.ItemListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context="com.zybooks.serverm.MainActivity"
+        tools:context="com.mad.servermonitor.MainActivity"
         tools:listitem="@layout/list_item_server" />
 </androidx.constraintlayout.widget.ConstraintLayout>
