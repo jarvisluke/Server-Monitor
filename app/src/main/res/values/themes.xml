@@ -1,9 +1,22 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.ServerMonitor" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Theme.ServerM" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="Theme.ServerMonitor" parent="Base.Theme.ServerMonitor" />
+    <style name="serverList">
+        <item name="android:textSize">26sp</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="serverID">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingLeft">30dp</item>
+        <item name="android:paddingRight">30dp</item>
+    </style>
+
+    <style name="serverInfo">
+        <item name="android:textSize">30sp</item>
+        <item name="android:padding">30dp</item>
+    </style>
 </resources>
