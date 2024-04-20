@@ -1,0 +1,96 @@
+package com.mad.servermonitor;
+
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.MalformedURLException;
+
+public class MonitoredServer extends Thread{
+    public class ServerData {
+
+        public double cpu;
+        public double ram;
+        public double[] cores;
+
+        public ServerData(double cpu, double ram, double[] cores) {
+            this.cpu = cpu;
+            this.ram = ram;
+            this.cores = cores;
+        }
+
+    }
+    private static final String TAG = "MonitoredServer";
+    private URL url;
+    private String JSONstring;
+    private boolean looping;
+    public MonitoredServer(String ip, String port, String key) throws MalformedURLException {
+        this.url = new URL("http://" + ip + ":" + port + "/?key=" + key);
+        System.out.println("http://" + ip + ":" + port + "/?key=" + key);
+        looping = true;
+        Log.d(TAG, "about to start thread...");
+        this.start();
+    }
+
+    private String queryData() throws IOException {
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestProperty("Content-Type", "application/json");
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer content = new StringBuffer();
+        while ((inputLine = in.readLine()) != null) {
+            content.append(inputLine);
+        }
+        in.close();
+        return content.toString();
+    }
+
+    @Override
+    public void run() {
+        while (looping) {
+            try {
+                JSONstring = queryData();
+                Thread.sleep(3000);
+                Log.d(TAG, "looping");
+            } catch (IOException | InterruptedException ignored) { }
+        }
+    }
+
+    public ServerData getData() {
+        if (JSONstring != null) {
+            try {
+                JSONObject jsonObject = new JSONObject(JSONstring);
+                JSONArray cpucoresJSONarray = jsonObject.getJSONArray("cpucores");
+                double[] coresarray = new double[cpucoresJSONarray.length()];
+                for (int i = 0; i < cpucoresJSONarray.length(); i++) {coresarray[i] = cpucoresJSONarray.getDouble(i);}
+                return new ServerData(
+                        jsonObject.getDouble("cpu"),
+                        jsonObject.getDouble("memory"),
+                        coresarray
+                );
+            } catch (JSONException e) { return new ServerData(-1, -1, new double[] {-1}); }
+        }
+        return new ServerData(-1, -1, new double[] {-1});
+
+    }
+
+    public void stopThread() {
+        looping = false;
+    }
+
+    public void startThread() {
+        if (!looping) {
+            looping = true;
+            start();
+        }
+    }
+
+}
