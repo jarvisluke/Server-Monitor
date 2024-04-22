@@ -83,7 +83,8 @@ public class MonitoredServer extends Thread{
                         jsonObject.getDouble("memory"),
                         coresarray
                 );
-            } catch (JSONException e) { return new ServerData(-1, -1, new double[] {-1}); }
+            }
+            catch (JSONException e) { return new ServerData(-1, -1, new double[] {-1}); }
         }
         return new ServerData(-1, -1, new double[] {-1});
 
