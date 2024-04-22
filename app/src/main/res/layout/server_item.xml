@@ -5,8 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:background="@color/lightGray"
     android:padding="8dp"
     android:textSize="20sp"
     android:layout_margin="8dp"
+    android:background="@drawable/edit_text_background"
+    android:textColor="@android:color/white"
+    android:textColorHint="#80FFFFFF"
+    android:textStyle="bold"
     />
