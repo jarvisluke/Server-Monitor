@@ -29,14 +29,20 @@ public class MonitoredServer extends Thread{
     }
     private static final String TAG = "MonitoredServer";
     private URL url;
+    private URL safeUrl;
     private String JSONstring;
     private boolean looping;
     public MonitoredServer(String ip, String port, String key) throws MalformedURLException {
         this.url = new URL("http://" + ip + ":" + port + "/?key=" + key);
+        this.safeUrl = new URL("http://" + ip + ":" + port);
         System.out.println("http://" + ip + ":" + port + "/?key=" + key);
         looping = true;
         Log.d(TAG, "about to start thread...");
         this.start();
+    }
+
+    public String getSafeURL() {
+        return safeUrl.toString();
     }
 
     private String queryData() throws IOException {
@@ -45,7 +51,8 @@ public class MonitoredServer extends Thread{
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));
         String inputLine;
-        StringBuffer content = new StringBuffer();
+        //StringBuffer content = new StringBuffer();
+        StringBuilder content = new StringBuilder();
         while ((inputLine = in.readLine()) != null) {
             content.append(inputLine);
         }
