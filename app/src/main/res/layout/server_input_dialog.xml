@@ -1,0 +1,54 @@
+<!-- activity_main.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/gradiant_background">
+
+    <EditText
+        android:id="@+id/editTextIP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hintIP"
+        android:inputType="text"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@android:color/white"
+        android:textColorHint="#80FFFFFF"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/editTextPort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hintPort"
+        android:inputType="text"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@android:color/white"
+        android:textColorHint="#80FFFFFF"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/editTextConnectionKey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hintConnectionKey"
+        android:inputType="textPassword"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@android:color/white"
+        android:textColorHint="#80FFFFFF"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btnFetchServerDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btnFetchServerDetails"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_background"
+        android:elevation="4dp"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>

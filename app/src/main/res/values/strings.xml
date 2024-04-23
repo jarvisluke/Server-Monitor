@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Server Monitor</string>
+    <string name="btnAddServer">Add Server</string>
+    <string name="hintIP">IP Address</string>
+    <string name="hintPort">Port</string>
+    <string name="hintConnectionKey">Connection Key</string>
+    <string name="btnFetchServerDetails">Fetch Server Details</string>
+    <string name="cpu_label">CPU Utilization: %.1f%%</string>
+    <string name="cores_label">CPU Cores: %d</string>
+    <string name="memory_label">Memory: %.1f%%</string>
+    <string name="cpu_na">CPU: N/A</string>
+    <string name="cores_na">CPU Cores: N/A</string>
+    <string name="memory_na">Memory: N/A</string>
+    <string name="btnFetchSuccess">Added new server at %s</string>
+    <string name="btnFetchFailure">Error: could not connect to server</string>
+</resources>

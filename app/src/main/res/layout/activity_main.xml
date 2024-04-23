@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@drawable/gradiant_background">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewServers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btnAddServer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btnAddServer"
+        android:layout_below="@id/recyclerViewServers"
+        android:textColor="@color/white"
+        android:background="@color/semiTransparent"
+        android:textStyle="bold"/>
+</RelativeLayout>
