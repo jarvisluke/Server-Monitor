@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // initialize a list of servers
         servers = new ArrayList<>();
 
         // Restore stored servers
@@ -56,15 +57,18 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        // Setup RecyclerView to display servers
         recyclerView = findViewById(R.id.recyclerViewServers);
         adapter = new ServerRecyclerViewAdapter(servers, this::showServerDetailsDialog);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // Setup "Add Server" button click listener
         Button btnAddServer = findViewById(R.id.btnAddServer);
         btnAddServer.setOnClickListener(v -> showServerInputDialog());
     }
 
+    // Method to display dialog for adding a new server
     private void showServerInputDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -79,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
+        // Define behavior when "Fetch Server Details" button is clicked
         btnFetchServerDetails.setOnClickListener(v -> {
             String ip = editTextIP.getText().toString();
             String port = editTextPort.getText().toString();
@@ -87,9 +92,10 @@ public class MainActivity extends AppCompatActivity {
             try {
                 MonitoredServer monitoredServer = new MonitoredServer(ip, port, connectionKey);
 
-                int position = servers.size(); // Position of the new item
+                // Add the new server to the list and notify the adapter
+                int position = servers.size(); // Position of the new server
                 servers.add(monitoredServer);
-                adapter.notifyItemInserted(position); // Notify adapter about the new item
+                adapter.notifyItemInserted(position); // Notify adapter about the new server
 
                 // Store server details
                 SharedPreferences sharedPreferences = getSharedPreferences("MonitoredServers", MODE_PRIVATE);
@@ -114,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
     private Handler handler;
     private Runnable updateServerDataRunnable;
 
+    // Method to display dialog showing details of a monitored server
     private void showServerDetailsDialog(MonitoredServer server) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -124,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tvCores = dialogView.findViewById(R.id.tvCores);
         TextView tvRAM = dialogView.findViewById(R.id.tvRAM);
 
+        // Define a handler and a runnable to periodically update server data
         handler = new Handler();
         updateServerDataRunnable = new Runnable() {
             @Override
@@ -137,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                     tvCores.setText(getString(R.string.cores_label, data.cores.length));
                     tvRAM.setText(getString(R.string.memory_label, data.ram));
                 } else {
+                    // If data is not available, display "N/A" for each field
                     tvCPU.setText(getString(R.string.cpu_na));
                     tvCores.setText(getString(R.string.cores_na));
                     tvRAM.setText(getString(R.string.memory_na));
