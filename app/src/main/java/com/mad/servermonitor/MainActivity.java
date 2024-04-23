@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.apply();
 
                 // Display success message
-                Snackbar snackbar = Snackbar.make(recyclerView, R.string.btnFetchFailure, Snackbar.LENGTH_LONG);
+                Snackbar snackbar = Snackbar.make(recyclerView, R.string.btnFetchSuccess, Snackbar.LENGTH_LONG);
                 snackbar.show();
             } catch (MalformedURLException | JSONException e) {
                 // Display failure message
